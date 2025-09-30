@@ -326,3 +326,15 @@ footer p.muted { color:rgba(230,247,239,0.85); margin-top:6px; font-size:0.95rem
 
 /* consistent hover scale for cards */
 .module-card, .story-card, .testimonial-card, .training-card, .pricing-card { will-change: transform; transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s; }
+
+/* WhatsApp Icon */
+.whatsapp-icon { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px; border-radius: 50%; font-size: 24px; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+
+/* Support */
+#donation { background: #f9f9f9; }
+
+/* Registration */
+.register-form { max-width: 500px; margin: 0 auto; text-align: left; }
+.register-form label { display: block; margin: 10px 0 5px; }
+.register-form input, .register-form select { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; }
+.register-form button { width: 100%; }

@@ -285,6 +285,74 @@
       </div>
     </div>
   </section>
+ <!-- Pricing (final CTA area) -->
+  <section id="pricing" data-aos="fade-up" aria-label="Pricing">
+    <div class="container">
+      <h2>Program Fee</h2>
+      <p class="intro">This training is <strong>completely free</strong> for this cohort. Seats are limited — secure yours now.</p>
+
+      <div class="pricing-grid">
+        <div class="pricing-card" data-aos="fade-up">
+          <h3>2-Week Intensive</h3>
+          <p class="price">FREE</p>
+          <ul>
+            <li>Hands-on training</li>
+            <li>1 month mentorship</li>
+            <li>Certificate on completion</li>
+            <li>Training materials & eBook</li>
+          </ul>
+          <a class="btn btn-primary" href="#register">Register (Free)</a>
+        </div>
+
+        <div class="pricing-card early-bird" data-aos="fade-up" data-aos-delay="80">
+          <h3>Supporter Package</h3>
+          <p class="price">Optional Donation</p>
+          <ul>
+            <li>Priority mentorship</li>
+            <li>Recognition as supporter</li>
+            <li>Helps fund more free cohorts</li>
+          </ul>
+          <a class="btn btn-ghost" href="#donation">Support the Program</a>
+        </div>
+      </div>
+
+      <div class="final-cta" style="margin-top:20px;">
+        <a class="btn btn-large btn-primary" href="#register">Secure Your Spot Now — 15th – 29th October, 2025</a>
+      </div>
+    </div>
+  </section>
+
+<!-- Registration Form -->
+  <section id="register" data-aos="fade-up">
+  <div class="container register-wrap">
+    <h2>Register Now</h2>
+    <p class="intro">Fill this quick form to secure your seat.</p>
+
+    <form id="regForm" class="register-form">
+      <label for="name">Full name</label>
+      <input id="name" name="name" type="text" required>
+
+      <label for="phone">Phone</label>
+      <input id="phone" name="phone" type="tel" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+
+      <label for="age">Age range</label>
+      <select id="age" name="age" required>
+        <option value="">Select</option>
+        <option value="18-25">18 - 25</option>
+        <option value="26-35">26 - 35</option>
+        <option value="36-45">36 - 45</option>
+        <option value="46+">46+</option>
+      </select>
+
+      <button type="submit" class="btn btn-primary btn-large">Submit Registration</button>
+
+      <p id="formMessage" aria-live="polite" style="margin-top:12px;"></p>
+    </form>
+  </div>
+</section>
 
   <!-- FAQs -->
   <section id="faqs" data-aos="fade-up" aria-label="FAQs">
@@ -324,23 +392,6 @@
       <p class="faq-note">❓ Still have questions? <a href="https://wa.me/2348100145204" target="_blank">Chat with us on WhatsApp</a></p>
     </div>
   </section>
-
- <!-- Register -->
-  <section id="register" class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Register</h2>
-      <p class="text-center mb-6 text-gray-600">Fill the form below to secure your spot in the training.</p>
-      
-      <!-- Embed Google Form (fixed) -->
-      <div class="max-w-3xl mx-auto">
-        <iframe src="https://forms.gle/fCMZBnK862JweopU6?embedded=true"
-                width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0">
-          Loading…
-        </iframe>
-      </div>
-    </div>
-  </section>
-
 
 <!-- Support This Initiative -->
 <section id="donate" class="donate" data-aos="fade-up">
@@ -396,42 +447,7 @@
     </div>
   </section>
 
-  <!-- Pricing (final CTA area) -->
-  <section id="pricing" data-aos="fade-up" aria-label="Pricing">
-    <div class="container">
-      <h2>Program Fee</h2>
-      <p class="intro">This training is <strong>completely free</strong> for this cohort. Seats are limited — secure yours now.</p>
-
-      <div class="pricing-grid">
-        <div class="pricing-card" data-aos="fade-up">
-          <h3>2-Week Intensive</h3>
-          <p class="price">FREE</p>
-          <ul>
-            <li>Hands-on training</li>
-            <li>1 month mentorship</li>
-            <li>Certificate on completion</li>
-            <li>Training materials & eBook</li>
-          </ul>
-          <a class="btn btn-primary" href="#register">Register (Free)</a>
-        </div>
-
-        <div class="pricing-card early-bird" data-aos="fade-up" data-aos-delay="80">
-          <h3>Supporter Package</h3>
-          <p class="price">Optional Donation</p>
-          <ul>
-            <li>Priority mentorship</li>
-            <li>Recognition as supporter</li>
-            <li>Helps fund more free cohorts</li>
-          </ul>
-          <a class="btn btn-ghost" href="#donation">Support the Program</a>
-        </div>
-      </div>
-
-      <div class="final-cta" style="margin-top:20px;">
-        <a class="btn btn-large btn-primary" href="#register">Secure Your Spot Now — 15th – 29th October, 2025</a>
-      </div>
-    </div>
-  </section>
+ 
 
   <!-- Footer -->
   <footer>
@@ -527,14 +543,42 @@
         if (e.key === 'Enter' || e.key === ' ') btn.click();
       });
     });
-  </script>
-<!-- WhatsApp Floating Help Button (smaller) -->
-  <a href="https://wa.me/2348100145204?text=Hello%20VOAL%20Technology%2C%20I%20need%20help%20with%20registration."
-     target="_blank" 
-     class="fixed bottom-6 right-6 bg-green-500 rounded-full p-3 shadow-lg hover:bg-green-600 transition">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-         alt="WhatsApp Help" class="w-6 h-6">
-  </a>
 
+const GS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzMk6v7h16XYFLX0_MgHYoEJTVN3oE80tIxoY0JifteVm9gTxqG8u9_zRxm1wMm1sZJbQ/exec";
+
+  const form = document.getElementById('regForm');
+  const msg = document.getElementById('formMessage');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.textContent = 'Submitting...';
+
+    const data = {
+      name: form.name.value.trim(),
+      phone: form.phone.value.trim(),
+      email: form.email.value.trim(),
+      age: form.age.value
+    };
+
+    try {
+      const res = await fetch(GS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const json = await res.json();
+      if (json.result === 'success') {
+        msg.textContent = '✅ Registration successful — we will contact you shortly.';
+        form.reset();
+      } else {
+        msg.textContent = '❌ Submission failed: ' + (json.message || 'unknown error');
+      }
+    } catch (err) {
+      console.error(err);
+      msg.textContent = '❌ Error submitting form. If this continues, try the Register button or Whatsapp.';
+    }
+  });
+  </script>
 </body>
 </html>
