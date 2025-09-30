@@ -6,67 +6,22 @@
   <title>VOAL Technology — Free Solar Inverter Training (15th – 29th October, 2025)</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-  <style>
-    /* Additions for responsive nav */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 30px;
-      height: 24px;
-      cursor: pointer;
-    }
-    .hamburger span {
-      display: block;
-      height: 3px;
-      width: 100%;
-      background: #fff;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-    nav {
-      transition: max-height 0.3s ease;
-    }
+
+<style>
+    /* Responsive Nav + Hamburger */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 30px; height: 24px; cursor: pointer; }
+    .hamburger span { display: block; height: 3px; width: 100%; background: #fff; border-radius: 2px; transition: 0.3s; }
+    nav { transition: max-height 0.3s ease; }
     @media (max-width: 768px) {
-      nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-        position: absolute;
-        top: 70px;
-        right: 0;
-        background: rgba(3,7,18,0.95);
-        width: 100%;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        padding: 0;
-      }
-      nav ul.show {
-        max-height: 500px; /* enough for menu items */
-      }
-      nav ul li {
-        width: 100%;
-      }
-      nav ul li a {
-        display: block;
-        width: 100%;
-        padding: 12px 20px;
-      }
-      .hamburger {
-        display: flex;
-      }
+      nav ul { flex-direction: column; align-items: flex-start; position: absolute; top: 70px; right: 0; background: rgba(3,7,18,0.95); width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0; }
+      nav ul.show { max-height: 500px; }
+      nav ul li { width: 100%; }
+      nav ul li a { display: block; width: 100%; padding: 12px 20px; }
+      .hamburger { display: flex; }
     }
-    /* Animate hamburger when active */
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translateY(8px);
-    }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translateY(-8px);
-    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translateY(8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
   </style>
 </head>
 <body>
@@ -101,7 +56,6 @@
   <!-- HERO -->
   <section id="hero" class="hero" aria-label="Hero">
     <div class="hero-media" aria-hidden="true">
-      <!-- optional short looping hero clip; falls back to poster/background -->
       <video class="hero-video" autoplay muted loop playsinline poster="solar6.jpg">
         <source src="hero-loop.mp4" type="video/mp4" />
       </video>
@@ -109,26 +63,15 @@
 
     <div class="hero-overlay" data-aos="fade-down">
       <h1>Become a Certified Solar Inverter Expert in Just 2 Weeks!</h1>
-
-      <p class="hero-sub">
-        Renewable energy professionals are in high demand as countries shift to cleaner power.
-        In Nigeria, this need is urgent — master solar inverter design and installation to
-        build a high-value, resilient career while helping your community access reliable energy.
-      </p>
-
+      <p class="hero-sub">Renewable energy professionals are in high demand... build a resilient career while helping your community.</p>
       <div class="hero-info">
-        <p>
-          Hands-on sessions, real project work and mentorship — everything you need to design,
-          install and maintain solar-inverter systems for homes and businesses.
-        </p>
+        <p>Hands-on sessions, real project work and mentorship — everything you need to design, install and maintain solar-inverter systems.</p>
       </div>
-
       <div class="hero-badges" aria-hidden="true">
         <span class="value-badge">Hands-on Projects</span>
         <span class="value-badge">2 Weeks Mentorship</span>
         <span class="value-badge">Certificate</span>
       </div>
-
       <div class="hero-cta">
         <a class="btn btn-primary" href="#register">Register Now (Free)</a>
         <a class="btn btn-ghost" href="#event">View Event Details</a>
@@ -382,21 +325,21 @@
     </div>
   </section>
 
-  <!-- Register -->
+ <!-- Register -->
   <section id="register" class="py-16 bg-gray-100">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Register</h2>
-    <p class="text-center mb-6 text-gray-600">Fill the form below to secure your spot in the training.</p>
-    
-    <!-- Embed Google Form -->
-    <div class="max-w-3xl mx-auto">
-      <iframe src="https://https://forms.gle/VRVz7D6Fw9hMcX4a7/viewform?embedded=true"
-              width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0">
-        Loading…
-      </iframe>
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Register</h2>
+      <p class="text-center mb-6 text-gray-600">Fill the form below to secure your spot in the training.</p>
+      
+      <!-- Embed Google Form (fixed) -->
+      <div class="max-w-3xl mx-auto">
+        <iframe src="https://forms.gle/fCMZBnK862JweopU6?embedded=true"
+                width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0">
+          Loading…
+        </iframe>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
 <!-- Support This Initiative -->
@@ -509,9 +452,9 @@
   <button id="backToTop" title="Back to top">↑</button>
 
   <!-- Scripts -->
+ 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    // AOS
     AOS.init({ duration: 800, once: true });
 
     // Active nav on scroll
@@ -585,13 +528,13 @@
       });
     });
   </script>
-<!-- WhatsApp Help Floating Button -->
-<a href="https://wa.me/2348100145204?text=Hello%20VOAL%20Technology%2C%20I%20need%20help%20with%20registration."
-   target="_blank" 
-   class="fixed bottom-6 right-6 bg-green-500 rounded-full p-4 shadow-lg hover:bg-green-600 transition">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-       alt="WhatsApp Help" class="w-8 h-8">
-</a>
+<!-- WhatsApp Floating Help Button (smaller) -->
+  <a href="https://wa.me/2348100145204?text=Hello%20VOAL%20Technology%2C%20I%20need%20help%20with%20registration."
+     target="_blank" 
+     class="fixed bottom-6 right-6 bg-green-500 rounded-full p-3 shadow-lg hover:bg-green-600 transition">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+         alt="WhatsApp Help" class="w-6 h-6">
+  </a>
 
 </body>
 </html>
