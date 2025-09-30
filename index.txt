@@ -125,7 +125,7 @@
 
       <div class="hero-badges" aria-hidden="true">
         <span class="value-badge">Hands-on Projects</span>
-        <span class="value-badge">1 Month Mentorship</span>
+        <span class="value-badge">2 Weeks Mentorship</span>
         <span class="value-badge">Certificate</span>
       </div>
 
@@ -218,11 +218,11 @@
       </div>
 
       <div class="instructor-content" data-aos="fade-left">
-        <h2>Meet Victor Alamu — Your Instructor</h2>
+        <h2>Meet Victor Alamu — Your Host</h2>
         <p class="lead">Victor Alamu — Electrical & Electronic Engineer • Renewable Energy Specialist</p>
 
         <div class="story-text">
-          <p>Hi! I’m <strong>Victor Alamu</strong>, an Electrical and Electronic Engineer with over <strong>7 years</strong> of experience. I started with electrical installations for homes and businesses and later specialized in solar-inverter systems.</p>
+          <p>Hi! I’m <strong>Victor Alamu</strong>, founder of VOAL Technology - a solar servicing and technological company and also, a co-fouder of Tubim Energy Ltd, where we design scalable energy products. With over <strong>7 years</strong> of experience in the field. I started with electrical installations for homes and businesses and later specialized in solar-inverter systems.</p>
 
           <p>I led a mini-grid project for the Adiyan rural community (Ogun State) and have overseen numerous residential and commercial solar projects. I’ve seen how reliable energy transforms productivity, livelihoods, and communities — and I’m committed to making that change accessible.</p>
 
@@ -329,34 +329,7 @@
     </div>
   </section>
 
-  <!-- Support This Initiative -->
-<section id="donate" class="donate" data-aos="fade-up">
-  <div class="container">
-    <h2>Support This Initiative</h2>
-    <p class="intro">
-      This training is completely <strong>free</strong>, but it isn’t without cost.  
-      Your support helps us provide training materials, mentorship, and resources 
-      to empower more Nigerians with solar installation skills.  
-      Every contribution, no matter how small, makes a real difference.
-    </p>
-
-    <div class="donation-grid">
-      <div class="donation-card" data-amount="5000">₦5,000 <span>Starter Support</span></div>
-      <div class="donation-card" data-amount="10000">₦10,000 <span>Change Maker</span></div>
-      <div class="donation-card" data-amount="25000">₦25,000 <span>Community Builder</span></div>
-      <div class="donation-card" data-amount="50000">₦50,000 <span>Impact Partner</span></div>
-    </div>
-
-    <p class="donation-note">
-      Prefer a custom amount? Click below to message us on WhatsApp for payment details.  
-      Together, we can train and empower more people.
-    </p>
-    <a class="btn btn-primary" id="donateCustom" href="https://wa.me/2348100145204" target="_blank">
-      Contribute via WhatsApp
-    </a>
-  </div>
-</section>
-
+  
 
   <!-- Program Fee -->
   <section id="program-fee" data-aos="fade-up" aria-label="Program fee">
@@ -423,6 +396,34 @@
       <p class="small-note">We'll confirm your seat and send venue details once your registration is accepted.</p>
     </div>
   </section>
+
+<!-- Support This Initiative -->
+<section id="donate" class="donate" data-aos="fade-up">
+  <div class="container">
+    <h2>Support This Initiative</h2>
+    <p class="intro">
+      This training is completely <strong>free</strong>, but it isn’t without cost.  
+      Your support helps us provide training materials, mentorship, and resources 
+      to empower more Nigerians with solar installation skills.  
+      Every contribution, no matter how small, makes a real difference.
+    </p>
+
+    <div class="donation-grid">
+      <div class="donation-card" data-amount="5000">₦5,000 <span>Starter Support</span></div>
+      <div class="donation-card" data-amount="10000">₦10,000 <span>Change Maker</span></div>
+      <div class="donation-card" data-amount="25000">₦25,000 <span>Community Builder</span></div>
+      <div class="donation-card" data-amount="50000">₦50,000 <span>Impact Partner</span></div>
+    </div>
+
+    <p class="donation-note">
+      Prefer a custom amount? Click below to message us on WhatsApp for payment details.  
+      Together, we can train and empower more people.
+    </p>
+    <a class="btn btn-primary" id="donateCustom" href="https://wa.me/2348100145204" target="_blank">
+      Contribute via WhatsApp
+    </a>
+  </div>
+</section>
 
   <!-- Social -->
   <section id="social" class="social" data-aos="fade-up" aria-label="Social links">
