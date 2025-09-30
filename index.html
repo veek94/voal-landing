@@ -4,15 +4,72 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>VOAL Technology — Free Solar Inverter Training (15th – 29th October, 2025)</title>
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- AOS (Animate On Scroll) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    /* Additions for responsive nav */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 30px;
+      height: 24px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: #fff;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    nav {
+      transition: max-height 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: rgba(3,7,18,0.95);
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0;
+      }
+      nav ul.show {
+        max-height: 500px; /* enough for menu items */
+      }
+      nav ul li {
+        width: 100%;
+      }
+      nav ul li a {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+    /* Animate hamburger when active */
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+  </style>
 </head>
 <body>
-
   <!-- Header / Navbar -->
   <header>
     <div class="container header-inner">
@@ -35,6 +92,9 @@
           <li><a href="#register">Register</a></li>
         </ul>
       </nav>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </header>
 
@@ -449,7 +509,6 @@
     // Active nav on scroll
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav ul li a');
-
     function onScroll() {
       let scrollPos = window.pageYOffset || document.documentElement.scrollTop;
       sections.forEach(section => {
@@ -466,6 +525,20 @@
     window.addEventListener('scroll', onScroll);
     onScroll();
 
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.querySelector('nav ul');
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    });
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('show');
+        hamburger.classList.remove('active');
+      });
+    });
+
     // Back to top
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
@@ -473,7 +546,7 @@
     });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Donation quick flow (WhatsApp)
+    // Donation quick flow
     document.querySelectorAll('.donation-card').forEach(card => {
       card.addEventListener('click', () => {
         const amount = card.getAttribute('data-amount');
@@ -488,7 +561,6 @@
       button.addEventListener('click', () => {
         const faqItem = button.parentElement;
         const expanded = button.getAttribute('aria-expanded') === 'true';
-        // close other items (optional)
         document.querySelectorAll('.faq-item').forEach(item => {
           if (item !== faqItem) {
             item.classList.remove('active');
@@ -499,8 +571,6 @@
         button.setAttribute('aria-expanded', String(!expanded));
       });
     });
-
-    // keyboard support for FAQ
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') btn.click();
