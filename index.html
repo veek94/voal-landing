@@ -6,8 +6,7 @@
   <title>VOAL Technology — Free Solar Inverter Training (15th – 29th October, 2025)</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-
-<style>
+  <style>
     /* Responsive Nav + Hamburger */
     .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 30px; height: 24px; cursor: pointer; }
     .hamburger span { display: block; height: 3px; width: 100%; background: #fff; border-radius: 2px; transition: 0.3s; }
@@ -83,7 +82,6 @@
   <section id="event" class="event-banner" data-aos="fade-up" aria-label="Event">
     <div class="container event-inner">
       <div class="event-left" data-aos="zoom-in">
-        <!-- Ensures image scales and crops nicely -->
         <img src="Event.jpg" alt="Upcoming Training Event" class="event-art">
       </div>
 
@@ -91,7 +89,6 @@
         <h2>Upcoming Cohort</h2>
         <p class="event-venue"><strong>Dates:</strong> <strong>15th – 29th October, 2025</strong></p>
         <p class="event-venue"><strong>Venue:</strong> Virtual — <em>Live on YouTube</em></p>
-
         <p class="event-quick">This free, intensive 2-week program is practical and mentorship-driven. Expect daily live lessons, Q&A, hands-on project walkthroughs, and post-course support.</p>
 
         <ul class="event-bullets">
@@ -124,32 +121,59 @@
           <h3>Module 1: Intro to Solar Energy</h3>
           <p>Types of systems, solar radiation basics and how panels generate electricity.</p>
         </div>
-
         <div class="module-card" data-aos="fade-up" data-aos-delay="80">
           <h3>Module 2: Solar System Design</h3>
           <p>Load calculations, panel/inverter/battery sizing and layout planning.</p>
         </div>
-
         <div class="module-card" data-aos="fade-up" data-aos-delay="120">
           <h3>Module 3: Inverter Installation</h3>
           <p>Rack, wire, configure and commission inverters for resilient systems.</p>
         </div>
-
         <div class="module-card" data-aos="fade-up" data-aos-delay="160">
           <h3>Module 4: Battery Management</h3>
           <p>BMS basics, battery configurations, safety and longevity strategies.</p>
         </div>
-
         <div class="module-card" data-aos="fade-up" data-aos-delay="200">
           <h3>Module 5: Safety Standards</h3>
           <p>Codes, earthing, PPE, and professional installation best practices.</p>
         </div>
-
         <div class="module-card" data-aos="fade-up" data-aos-delay="240">
           <h3>Module 6: Business Setup</h3>
           <p>Quoting, client acquisition, project management and post-sales support.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Registration Form -->
+  <section id="register" data-aos="fade-up">
+    <div class="container register-wrap">
+      <h2>Register Now</h2>
+      <p class="intro">Fill this quick form to secure your seat.</p>
+
+      <form id="regForm" class="register-form">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" required>
+
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+
+        <label for="age">Age range</label>
+        <select id="age" name="age" required>
+          <option value="">Select</option>
+          <option value="18-25">18 - 25</option>
+          <option value="26-35">26 - 35</option>
+          <option value="36-45">36 - 45</option>
+          <option value="46+">46+</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary btn-large">Submit Registration</button>
+
+        <p id="formMessage" aria-live="polite" style="margin-top:12px;"></p>
+      </form>
     </div>
   </section>
 
@@ -322,37 +346,6 @@
     </div>
   </section>
 
-<!-- Registration Form -->
-  <section id="register" data-aos="fade-up">
-  <div class="container register-wrap">
-    <h2>Register Now</h2>
-    <p class="intro">Fill this quick form to secure your seat.</p>
-
-    <form id="regForm" class="register-form">
-      <label for="name">Full name</label>
-      <input id="name" name="name" type="text" required>
-
-      <label for="phone">Phone</label>
-      <input id="phone" name="phone" type="tel" required>
-
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required>
-
-      <label for="age">Age range</label>
-      <select id="age" name="age" required>
-        <option value="">Select</option>
-        <option value="18-25">18 - 25</option>
-        <option value="26-35">26 - 35</option>
-        <option value="36-45">36 - 45</option>
-        <option value="46+">46+</option>
-      </select>
-
-      <button type="submit" class="btn btn-primary btn-large">Submit Registration</button>
-
-      <p id="formMessage" aria-live="polite" style="margin-top:12px;"></p>
-    </form>
-  </div>
-</section>
 
   <!-- FAQs -->
   <section id="faqs" data-aos="fade-up" aria-label="FAQs">
@@ -544,37 +537,44 @@
       });
     });
 
-const form = document.getElementById("myForm");
+// Form submission
+    const form = document.getElementById("regForm");
+    const formMessage = document.getElementById("formMessage");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-  const formData = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    message: document.getElementById("message").value
-  };
+      const formData = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        age: document.getElementById("age").value
+      };
 
-  try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbx933qfQXLyooIn8zp8MF39fw5TErbdYLMbYX9ubrUwB0Cre1fsBL4sJiNdaQFUUZeM/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbx933qfQXLyooIn8zp8MF39fw5TErbdYLMbYX9ubrUwB0Cre1fsBL4sJiNdaQFUUZeM/exec",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+          }
+        );
+
+        const result = await response.json();
+
+        if (result.result === "success") {
+          formMessage.textContent = "✅ Form submitted successfully!";
+          form.reset();
+        } else {
+          formMessage.textContent = "❌ Error submitting form: " + (result.error || "Unknown error");
+        }
+
+      } catch (err) {
+        formMessage.textContent = "❌ Error submitting form. If this continues, try the Register button or Whatsapp.";
+        console.error(err);
+      }
     });
-
-    const result = await response.json();
-
-    if (result.result === "success") {
-      alert("Form submitted successfully!");
-    } else {
-      alert("❌ Error submitting form: " + result.error);
-    }
-
-  } catch (err) {
-    alert("❌ Error submitting form. If this continues, try the Register button or Whatsapp.");
-    console.error(err);
-  }
-});
   </script>
 </body>
 </html>
