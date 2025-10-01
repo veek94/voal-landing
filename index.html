@@ -4,11 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>VOAL Technology — Free Solar Inverter Training (15th – 29th October, 2025)</title>
+
+  <!-- Your CSS (keep this file unchanged) -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- AOS (Animate On Scroll) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 
   <style>
-    /* Responsive Nav + Hamburger */
+    /* Responsive Nav + Hamburger (kept inline as in your file) */
     .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 30px; height: 24px; cursor: pointer; }
     .hamburger span { display: block; height: 3px; width: 100%; background: #fff; border-radius: 2px; transition: 0.3s; }
     nav { transition: max-height 0.3s ease; }
@@ -24,23 +28,11 @@
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
   </style>
 
-  <!-- Firebase -->
+  <!-- Firebase SDKs (kept in head as you had them) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-  <script>
-    // Your Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyB-1TQsUTckhDdWLuXWyutIiOwycU-X2uE",
-      authDomain: "solar-training-1e6be.firebaseapp.com",
-      projectId: "solar-training-1e6be",
-      storageBucket: "solar-training-1e6be.firebasestorage.app",
-      messagingSenderId: "5892298211",
-      appId: "1:5892298211:web:2e743c67f6bef3afde7cd6"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
@@ -115,7 +107,7 @@
         </ul>
         <div class="event-actions">
           <a class="btn btn-primary" href="#register">Reserve Your Spot</a>
-          <a class="btn btn-primary" href="https://www.youtube.com" target="_blank" rel="noopener">Follow on YouTube</a>
+          <a class="btn btn-primary" href="https://www.youtube.com/@VOALTechnologyLtd" target="_blank" rel="noopener">Follow on YouTube</a>
         </div>
       </div>
     </div>
@@ -123,41 +115,43 @@
 
   <!-- Modules -->
   <section id="modules" class="modules" aria-label="Modules">
-    <video class="modules-video" autoplay muted loop playsinline aria-hidden="true">
-      <source src="training-bg.mp4" type="video/mp4">
-    </video>
-    <div class="modules-overlay"></div>
-    <div class="container modules-wrap" data-aos="fade-up">
-      <h2>What You’ll Learn</h2>
-      <p class="intro">From foundations to hands-on installations: design, install, configure and run solar-inverter systems.</p>
-      <div class="modules-grid">
-        <div class="module-card" data-aos="fade-up" data-aos-delay="40">
-          <h3>Module 1: Intro to Solar Energy</h3>
-          <p>Types of systems, solar radiation basics and how panels generate electricity.</p>
-        </div>
-        <div class="module-card" data-aos="fade-up" data-aos-delay="80">
-          <h3>Module 2: Solar System Design</h3>
-          <p>Load calculations, panel/inverter/battery sizing and layout planning.</p>
-        </div>
-        <div class="module-card" data-aos="fade-up" data-aos-delay="120">
-          <h3>Module 3: Inverter Installation</h3>
-          <p>Rack, wire, configure and commission inverters for resilient systems.</p>
-        </div>
-        <div class="module-card" data-aos="fade-up" data-aos-delay="160">
-          <h3>Module 4: Battery Management</h3>
-          <p>BMS basics, battery configurations, safety and longevity strategies.</p>
-        </div>
-        <div class="module-card" data-aos="fade-up" data-aos-delay="200">
-          <h3>Module 5: Safety Standards</h3>
-          <p>Codes, earthing, PPE, and professional installation best practices.</p>
-        </div>
-        <div class="module-card" data-aos="fade-up" data-aos-delay="240">
-          <h3>Module 6: Business Setup</h3>
-          <p>Quoting, client acquisition, project management and post-sales support.</p>
-        </div>
+  <video class="modules-video" autoplay muted loop playsinline aria-hidden="true">
+    <source src="training-bg.mp4" type="video/mp4">
+  </video>
+  <div class="modules-overlay"></div>
+
+  <div class="container modules-wrap" data-aos="fade-up">
+    <h2>What You’ll Learn</h2>
+    <p class="intro">From foundations to hands-on installations: design, install, configure and run solar-inverter systems.</p>
+    <div class="modules-grid">
+      <div class="module-card" data-aos="fade-up" data-aos-delay="40">
+        <h3>Module 1: Intro to Solar Energy</h3>
+        <p>Types of systems, solar radiation basics and how panels generate electricity.</p>
+      </div>
+      <div class="module-card" data-aos="fade-up" data-aos-delay="80">
+        <h3>Module 2: Solar System Design</h3>
+        <p>Load calculations, panel/inverter/battery sizing and layout planning.</p>
+      </div>
+      <div class="module-card" data-aos="fade-up" data-aos-delay="120">
+        <h3>Module 3: Inverter Installation</h3>
+        <p>Rack, wire, configure and commission inverters for resilient systems.</p>
+      </div>
+      <div class="module-card" data-aos="fade-up" data-aos-delay="160">
+        <h3>Module 4: Battery Management</h3>
+        <p>BMS basics, battery configurations, safety and longevity strategies.</p>
+      </div>
+      <div class="module-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Module 5: Safety Standards</h3>
+        <p>Codes, earthing, PPE, and professional installation best practices.</p>
+      </div>
+      <div class="module-card" data-aos="fade-up" data-aos-delay="240">
+        <h3>Module 6: Business Setup</h3>
+        <p>Quoting, client acquisition, project management and post-sales support.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Instructor -->
   <section id="instructor" class="instructor" data-aos="fade-up" aria-label="Instructor">
@@ -311,20 +305,6 @@
     </div>
   </section>
 
-  <!-- Support This Initiative / Donation -->
-  <section id="donation" data-aos="fade-up" aria-label="Support this initiative">
-    <div class="container">
-      <h2>Support This Initiative</h2>
-      <p>Your donation helps us provide free training, materials and mentorship to Nigerians across the country.</p>
-      <div class="donation-grid">
-        <div class="donation-card" data-amount="5000">₦5,000</div>
-        <div class="donation-card" data-amount="10000">₦10,000</div>
-        <div class="donation-card" data-amount="20000">₦20,000</div>
-        <div class="donation-card" data-amount="0" id="donateCustom">Other Amount</div>
-      </div>
-    </div>
-  </section>
-
   <!-- Registration -->
   <section id="register" data-aos="fade-up" aria-label="Registration">
     <div class="container">
@@ -343,118 +323,156 @@
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
         </div>
+
+        <!-- Age changed to a range select as requested -->
         <div class="form-group">
-          <label for="age">Age</label>
-          <input type="number" id="age" name="age" required>
+          <label for="age">Age range</label>
+          <select id="age" name="age" required>
+            <option value="">Select age range</option>
+            <option value="16-17">16 - 17</option>
+            <option value="18-25">18 - 25</option>
+            <option value="26-35">26 - 35</option>
+            <option value="36-45">36 - 45</option>
+            <option value="46+">46+</option>
+          </select>
         </div>
+
         <button type="submit" class="btn btn-primary">Register</button>
-        <p id="formMessage"></p>
+        <p id="formMessage" aria-live="polite" style="margin-top:12px;"></p>
       </form>
     </div>
   </section>
 
-  <!-- Social -->
-  <section id="social" data-aos="fade-up" aria-label="Social">
-    <div class="container social-inner">
-      <h2>Follow Us</h2>
-      <div class="social-links">
-        <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
-        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
+<!-- Support This Initiative / Donation -->
+
+<section id="donation" data-aos="fade-up" aria-label="Support this initiative">
+  <div class="container">
+    <h2>Support This Life-Changing Initiative</h2>
+    <p class="intro">
+      Help us empower Nigerians with free solar-inverter training! Your donation provides training materials, mentorship, and access to renewable energy skills for hundreds of eager learners across the country.
+    </p>
+    <p class="impact">
+      <strong>Every donation makes a difference:</strong>
+    </p>
+
+    <div class="donation-grid">
+      <div class="donation-card" data-amount="5000">
+        <i class="fas fa-user-graduate"></i>
+        <strong>₦1,000</strong>
+        <span>Sponsor 1 student</span>
+      </div>
+      <div class="donation-card" data-amount="10000">
+        <i class="fas fa-solar-panel"></i>
+        <strong>₦5,000</strong>
+        <span>Provide a hands-on solar kit</span>
+      </div>
+      <div class="donation-card" data-amount="20000">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <strong>₦10,000</strong>
+        <span>Fund mentorship & projects</span>
+      </div>
+      <div class="donation-card" data-amount="0" id="donateCustom">
+        <i class="fas fa-heart"></i>
+        <strong>Other Amount</strong>
+        <span>Support according to your capacity</span>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer data-aos="fade-up">
-    <div class="container footer-inner">
-      <p>© 2025 VOAL Technology. All Rights Reserved.</p>
-      <a href="#hero" class="back-to-top">Back to top ↑</a>
+    <p class="thankyou-note">
+      <em>Your support directly impacts the future of renewable energy in Nigeria.</em>
+    </p>
+  </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container" data-aos="fade-up" data-aos-duration="1200">
+
+    <!-- Logo -->
+    <div class="footer-logo-box">
+      <img src="logo1.jpg" alt="VOAL Technology Logo" class="footer-logo">
     </div>
-  </footer>
 
-  <!-- JS -->
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#modules">Modules</a></li>
+        <li><a href="#program-fee">Pricing</a></li>
+        <li><a href="#register">Register</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:voaltechnology@gmail.com">voaltechnology@gmail.com</a></p>
+      <p>Phone: <a href="tel:+2348100145204">+2348100145204</a></p>
+    </div>
+
+    <!-- Socials -->
+    <div class="footer-socials" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="150">
+      <h4>Follow Us</h4>
+      <div class="socials">
+        <a href="https://facebook.com/voaltechnology" target="_blank" class="facebook" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://t.me/+AlyGlcpbN-E2NWU0" target="_blank" class="telegram" aria-label="Telegram">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+        <a href="https://wa.me/2348100145204" target="_blank" class="whatsapp" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://youtube.com/@VOALTechnologyLtd" target="_blank" class="youtube" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+    <p>&copy; <span id="year"></span> VOAL Technology Ltd. All Rights Reserved.</p>
+  </div>
+</footer>
+
+
+
+
+  <!-- Floating WhatsApp Help (keeps same markup) -->
+<!-- WhatsApp Floating Help Icon -->
+<a href="https://wa.me/2348100145204" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+</a>
+
+  <!-- AOS script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>
-    AOS.init();
 
-    // Hamburger menu toggle
-    const hamburger = document.getElementById("hamburger");
-    const navUl = document.querySelector("nav ul");
-    hamburger.addEventListener("click", () => {
-      navUl.classList.toggle("show");
-      hamburger.classList.toggle("active");
-    });
+  <!-- Your external JS (all behaviors and firebase are here) -->
+  <script src="script.js"></script>
+<script type="module">
+  // Import Firebase (make sure you’ve included Firebase scripts via CDN or npm)
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-    // Registration form Firebase
-    const regForm = document.getElementById("regForm");
-    const formMessage = document.getElementById("formMessage");
-    regForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const age = document.getElementById("age").value;
+ </script>
+<div class="footer-container" data-aos="fade-up" data-aos-duration="1200">
+  ...
+</div>
 
-      if (!name || !phone || !email || !age) {
-        formMessage.textContent = "Please fill in all fields.";
-        formMessage.style.color = "red";
-        return;
-      }
+<div class="footer-socials" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="150">
+  ...
+</div>
 
-      try {
-        await db.collection("registrations").add({
-          name, phone, email, age,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        formMessage.textContent = "✅ Registration submitted successfully!";
-        formMessage.style.color = "green";
-        regForm.reset();
-      } catch (err) {
-        console.error(err);
-        formMessage.textContent = "❌ Error submitting registration. Try again.";
-        formMessage.style.color = "red";
-      }
-    });
+<div class="footer-bottom" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+  ...
+</div>
 
-    // Donation buttons Firebase + WhatsApp
-    document.querySelectorAll('.donation-card').forEach(card => {
-      card.addEventListener('click', async () => {
-        let amount = card.getAttribute('data-amount');
-        if (amount == "0") return; // Custom handled separately
-        try {
-          await db.collection('donations').add({
-            amount: parseInt(amount),
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          const message = encodeURIComponent(`I want to donate ₦${amount} to support VOAL Technology free training.`);
-          window.open(`https://wa.me/2348100145204?text=${message}`, '_blank');
-        } catch (err) { console.error(err); alert("Failed to record donation."); }
-      });
-    });
-
-    // Custom donation
-    document.getElementById('donateCustom').addEventListener('click', async () => {
-      const customAmount = prompt("Enter the amount you want to donate (₦):");
-      if (!customAmount || isNaN(customAmount) || parseInt(customAmount) <= 0) return;
-      try {
-        await db.collection('donations').add({
-          amount: parseInt(customAmount),
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        const message = encodeURIComponent(`I want to donate ₦${customAmount} to support VOAL Technology free training.`);
-        window.open(`https://wa.me/2348100145204?text=${message}`, '_blank');
-      } catch (err) { console.error(err); alert("Failed to record donation."); }
-    });
-
-    // Smooth scroll for back-to-top
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
 </body>
+<script type="module" src="script.js"></script>
+
 </html>
