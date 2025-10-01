@@ -471,6 +471,15 @@
 <div class="footer-bottom" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
   ...
 </div>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.querySelector('nav ul');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('show');
+  });
+});
 
 </body>
 <script type="module" src="script.js"></script>
