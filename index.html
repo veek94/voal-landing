@@ -6,6 +6,7 @@
   <title>VOAL Technology — Free Solar Inverter Training (15th – 29th October, 2025)</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
   <style>
     /* Responsive Nav + Hamburger */
     .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 30px; height: 24px; cursor: pointer; }
@@ -22,6 +23,25 @@
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
   </style>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-1TQsUTckhDdWLuXWyutIiOwycU-X2uE",
+      authDomain: "solar-training-1e6be.firebaseapp.com",
+      projectId: "solar-training-1e6be",
+      storageBucket: "solar-training-1e6be.firebasestorage.app",
+      messagingSenderId: "5892298211",
+      appId: "1:5892298211:web:2e743c67f6bef3afde7cd6"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
 </head>
 <body>
   <!-- Header / Navbar -->
@@ -59,7 +79,6 @@
         <source src="hero-loop.mp4" type="video/mp4" />
       </video>
     </div>
-
     <div class="hero-overlay" data-aos="fade-down">
       <h1>Become a Certified Solar Inverter Expert in Just 2 Weeks!</h1>
       <p class="hero-sub">Renewable energy professionals are in high demand... build a resilient career while helping your community.</p>
@@ -84,19 +103,16 @@
       <div class="event-left" data-aos="zoom-in">
         <img src="Event.jpg" alt="Upcoming Training Event" class="event-art">
       </div>
-
       <div class="event-right">
         <h2>Upcoming Cohort</h2>
-        <p class="event-venue"><strong>Dates:</strong> <strong>15th – 29th October, 2025</strong></p>
+        <p class="event-venue"><strong>Dates:</strong> 15th – 29th October, 2025</p>
         <p class="event-venue"><strong>Venue:</strong> Virtual — <em>Live on YouTube</em></p>
         <p class="event-quick">This free, intensive 2-week program is practical and mentorship-driven. Expect daily live lessons, Q&A, hands-on project walkthroughs, and post-course support.</p>
-
         <ul class="event-bullets">
           <li><strong>Format:</strong> Live sessions streamed on YouTube + downloadable resources</li>
           <li><strong>Who it's for:</strong> Beginners, technicians, electricians, and anyone who wants to earn from solar installations</li>
           <li><strong>Seats:</strong> Limited — registration required</li>
         </ul>
-
         <div class="event-actions">
           <a class="btn btn-primary" href="#register">Reserve Your Spot</a>
           <a class="btn btn-primary" href="https://www.youtube.com" target="_blank" rel="noopener">Follow on YouTube</a>
@@ -111,11 +127,9 @@
       <source src="training-bg.mp4" type="video/mp4">
     </video>
     <div class="modules-overlay"></div>
-
     <div class="container modules-wrap" data-aos="fade-up">
       <h2>What You’ll Learn</h2>
       <p class="intro">From foundations to hands-on installations: design, install, configure and run solar-inverter systems.</p>
-
       <div class="modules-grid">
         <div class="module-card" data-aos="fade-up" data-aos-delay="40">
           <h3>Module 1: Intro to Solar Energy</h3>
@@ -151,186 +165,295 @@
       <div class="instructor-photo" data-aos="fade-right">
         <img src="Tutor.jpg" alt="Victor Alamu — Instructor">
       </div>
-
       <div class="instructor-content" data-aos="fade-left">
         <h2>Meet Victor Alamu — Your Host</h2>
         <p class="lead">Victor Alamu — Electrical & Electronic Engineer • Renewable Energy Specialist</p>
-
         <div class="story-text">
-          <p>Hi! I’m <strong>Victor Alamu</strong>, founder of VOAL Technology - a solar servicing and technological company and also, a co-founder of Tubim Energy Ltd, where we design scalable energy products. With over <strong>7 years</strong> of experience in the field. I started with electrical installations for homes and businesses and later specialized in solar-inverter systems.</p>
-
-          <p>I led a mini-grid project for the Adiyan rural community (Ogun State) and have overseen numerous residential and commercial solar projects. I’ve seen how reliable energy transforms productivity, livelihoods, and communities — and I’m committed to making that change accessible.</p>
-
-          <p>That’s why I’m offering this free training: I’m pouring in years of learning, real-world experience, and mentorship so you can gain the skills to start earning and empower your community.</p>
-
+          <p>Hi! I’m <strong>Victor Alamu</strong>, founder of VOAL Technology and co-founder of Tubim Energy Ltd. I specialize in solar-inverter systems with 7+ years experience in energy solutions.</p>
+          <p>I led a mini-grid project for the Adiyan rural community (Ogun State) and oversaw numerous residential and commercial solar projects. I’m committed to making energy access affordable and sustainable.</p>
+          <p>That’s why I’m offering this free training: I’m sharing years of experience and mentorship to help you start earning and empower your community.</p>
           <blockquote class="quote">“This is me giving every Nigerian a chance in life.”</blockquote>
         </div>
-
         <a class="btn btn-primary" href="#register">Learn with Victor</a>
       </div>
     </div>
   </section>
 
   <!-- Story -->
-  <section id="story" class="story" data-aos="fade-up" aria-label="Story">
-    <div class="container story-wrap">
-      <h2>Why This Training Exists</h2>
-      <p>In Nigeria, millions of households and small businesses still lack reliable electricity. Solar energy is the fastest-growing solution, yet there’s a gap in skilled professionals who can design, install and maintain these systems.</p>
-      <p>This training addresses that gap — giving you the skills, mentorship, and confidence to take charge of solar-inverter installations and start earning immediately.</p>
+  <section id="story" class="story" data-aos="fade-up" aria-label="Our story">
+    <div class="container story-inner">
+      <h2>Why We Started This Program</h2>
+      <p class="intro">Empowerment through skills and access to energy — driven by real impact in communities.</p>
+      <div class="story-grid">
+        <div class="story-card" data-aos="fade-up" data-aos-delay="40">
+          <h3>Community Impact</h3>
+          <p>Reliable electricity boosts productivity, health, and education. The Adiyan mini-grid showed how energy can transform a community.</p>
+        </div>
+        <div class="story-card" data-aos="fade-up" data-aos-delay="80">
+          <h3>Job Creation</h3>
+          <p>By teaching practical installation and business skills, graduates can take paid projects or start their own ventures immediately.</p>
+        </div>
+        <div class="story-card" data-aos="fade-up" data-aos-delay="120">
+          <h3>Sustainability</h3>
+          <p>We prioritize safe, maintainable installations so renewable systems are reliable and long-lasting for clients.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section id="testimonials" class="testimonials" data-aos="fade-up" aria-label="Testimonials">
-    <div class="container testimonials-wrap">
-      <h2>What Our Past Trainees Say</h2>
-      <div class="testimonial-grid">
+  <section id="testimonials" data-aos="fade-up" aria-label="Testimonials">
+    <div class="container">
+      <h2>What Our Students Say</h2>
+      <p class="intro">Real results from trainees who transformed their income and careers.</p>
+      <div class="testimonial-texts">
         <div class="testimonial-card" data-aos="fade-up" data-aos-delay="40">
-          <p>"Victor’s training made it easy to understand solar systems. I now run my own installation business!"</p>
-          <span>— Adaeze O.</span>
+          <p>"The training was a game-changer for me! I went from not knowing anything about solar systems to now installing them professionally. My first job paid me ₦200,000 for one installation!"</p>
+          <h4>— Chukwudi Okafor</h4>
         </div>
         <div class="testimonial-card" data-aos="fade-up" data-aos-delay="80">
-          <p>"Hands-on learning and mentorship were priceless. I feel confident to take on clients."</p>
-          <span>— Emeka N.</span>
+          <p>"I quit my 9-to-5 and started my own solar business. The mentorship after training helped me land clients quickly — I completed 7 installations in a month."</p>
+          <h4>— Sarah Abiola</h4>
         </div>
-        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="120">
-          <p>"I never thought I could understand solar design. Victor simplified everything!"</p>
-          <span>— Fatima I.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Trainings (same as Event section) -->
+  <section id="upcoming-trainings" class="event-banner" data-aos="fade-up">
+    <div class="container event-inner">
+      <div class="event-left">
+        <img src="Event.jpg" alt="Upcoming Training" class="event-art">
+      </div>
+      <div class="event-right">
+        <h2>Upcoming Training: Solar Inverter Installation</h2>
+        <p class="event-venue">📍 Venue: Virtual (YouTube Live)</p>
+        <p class="event-quick">🗓 Date: 15th – 29th October</p>
+        <ul class="event-bullets">
+          <li>Comprehensive hands-on solar training</li>
+          <li>Beginner friendly — no prior knowledge required</li>
+          <li>Earn a certificate of completion</li>
+        </ul>
+        <div class="event-actions">
+          <a href="#register" class="btn btn-primary">Register Now</a>
+          <a href="#donation" class="btn btn-primary">Support This Program</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Gallery -->
-  <section id="gallery" class="gallery" data-aos="fade-up" aria-label="Gallery">
-    <div class="container gallery-wrap">
+  <section id="gallery" data-aos="fade-up" aria-label="Gallery">
+    <div class="container">
       <h2>Gallery</h2>
+      <p class="intro">Snapshots from installations and our practical sessions.</p>
       <div class="gallery-grid">
-        <img src="solar1.jpg" alt="Training session 1">
-        <img src="solar2.jpg" alt="Training session 2">
-        <img src="solar3.jpg" alt="Training session 3">
-        <img src="solar4.jpg" alt="Practical project">
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="50">
+          <img src="solar8.jpg" alt="solar8">
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+          <img src="solar9.jpg" alt="solar9">
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="150">
+          <img src="solar10.jpg" alt="solar10">
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+          <img src="IMG-20241024-WA0097.jpg" alt="IMG-20241024-WA0097">
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Donation -->
-  <section id="donation" class="donation" data-aos="fade-up" aria-label="Donate">
-    <div class="container donation-wrap">
-      <h2>Support Free Trainings</h2>
-      <p>Your contributions help us provide free solar training to more Nigerians. Every donation counts!</p>
-      <a class="btn btn-primary" href="https://wa.me/2348100145204" target="_blank">Donate via WhatsApp</a>
-    </div>
-  </section>
-
-  <!-- FAQs -->
-  <section id="faqs" class="faqs" data-aos="fade-up" aria-label="FAQs">
-    <div class="container faq-wrap">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <h3>Do I need prior experience?</h3>
-        <p>No. This training starts from basics to advanced hands-on projects.</p>
-      </div>
-      <div class="faq-item">
-        <h3>How long is the training?</h3>
-        <p>2 weeks, with live sessions and ongoing mentorship.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Is it truly free?</h3>
-        <p>Yes! The only limit is available seats, so register early.</p>
+  <!-- Program Fee -->
+  <section id="program-fee" data-aos="fade-up" aria-label="Program fee">
+    <div class="container">
+      <h2>Program Fee</h2>
+      <div class="fee-card">
+        <h3>Full Course Value: <span class="strike">₦150,000</span></h3>
+        <p><strong>Special Offer:</strong> This training is provided completely <span class="highlight">FREE</span> of charge for this cohort.</p>
       </div>
     </div>
   </section>
 
-  <!-- Registration Form -->
-  <section id="register" class="register" data-aos="fade-up">
-    <div class="container register-wrap">
+  <!-- Pricing -->
+  <section id="pricing" data-aos="fade-up" aria-label="Pricing">
+    <div class="container">
+      <h2>Program Fee</h2>
+      <p class="intro">This training is <strong>completely free</strong> for this cohort. Seats are limited — secure yours now.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card" data-aos="fade-up" data-aos-delay="40">
+          <h3>Free Access</h3>
+          <p>All lessons, mentorship, and materials included.</p>
+          <span class="price">₦0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faqs" data-aos="fade-up" aria-label="FAQ">
+    <div class="container">
+      <h2>FAQs</h2>
+      <div class="faq-grid">
+        <div class="faq-card" data-aos="fade-up" data-aos-delay="40">
+          <h4>Who can join?</h4>
+          <p>Anyone above 16 years interested in solar technology — no prior experience required.</p>
+        </div>
+        <div class="faq-card" data-aos="fade-up" data-aos-delay="80">
+          <h4>Is this training online?</h4>
+          <p>Yes, live streamed via YouTube with downloadable resources.</p>
+        </div>
+        <div class="faq-card" data-aos="fade-up" data-aos-delay="120">
+          <h4>Do I get a certificate?</h4>
+          <p>Yes, a certificate of completion is issued to active participants who finish the program.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support This Initiative / Donation -->
+  <section id="donation" data-aos="fade-up" aria-label="Support this initiative">
+    <div class="container">
+      <h2>Support This Initiative</h2>
+      <p>Your donation helps us provide free training, materials and mentorship to Nigerians across the country.</p>
+      <div class="donation-grid">
+        <div class="donation-card" data-amount="5000">₦5,000</div>
+        <div class="donation-card" data-amount="10000">₦10,000</div>
+        <div class="donation-card" data-amount="20000">₦20,000</div>
+        <div class="donation-card" data-amount="0" id="donateCustom">Other Amount</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration -->
+  <section id="register" data-aos="fade-up" aria-label="Registration">
+    <div class="container">
       <h2>Register Now</h2>
-      <p class="intro">Fill this quick form to secure your seat.</p>
-
-      <form id="regForm" class="register-form">
-        <label for="name">Full name</label>
-        <input id="name" name="name" type="text" required>
-
-        <label for="phone">Phone</label>
-        <input id="phone" name="phone" type="tel" required>
-
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required>
-
-        <label for="age">Age range</label>
-        <select id="age" name="age" required>
-          <option value="">Select</option>
-          <option value="18-25">18 - 25</option>
-          <option value="26-35">26 - 35</option>
-          <option value="36-45">36 - 45</option>
-          <option value="46+">46+</option>
-        </select>
-
-        <button type="submit" class="btn btn-primary btn-large">Submit Registration</button>
-        <p id="formMessage" aria-live="polite" style="margin-top:12px;"></p>
+      <p class="intro">Fill the form below to secure your seat in the upcoming training.</p>
+      <form id="regForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <p id="formMessage"></p>
       </form>
     </div>
   </section>
 
+  <!-- Social -->
+  <section id="social" data-aos="fade-up" aria-label="Social">
+    <div class="container social-inner">
+      <h2>Follow Us</h2>
+      <div class="social-links">
+        <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer>
+  <footer data-aos="fade-up">
     <div class="container footer-inner">
-      <img src="logo1.jpg" alt="VOAL logo" class="footer-logo">
-      <p>VOAL Technology Ltd — Empowering Nigerians with renewable energy skills.</p>
+      <p>© 2025 VOAL Technology. All Rights Reserved.</p>
+      <a href="#hero" class="back-to-top">Back to top ↑</a>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    AOS.init({ duration: 800, once: true });
+    AOS.init();
 
-    // Hamburger menu
+    // Hamburger menu toggle
     const hamburger = document.getElementById("hamburger");
-    const navMenu = document.querySelector("nav ul");
+    const navUl = document.querySelector("nav ul");
     hamburger.addEventListener("click", () => {
-      navMenu.classList.toggle("show");
+      navUl.classList.toggle("show");
       hamburger.classList.toggle("active");
     });
 
-    // Form submission
-    const form = document.getElementById("regForm");
+    // Registration form Firebase
+    const regForm = document.getElementById("regForm");
     const formMessage = document.getElementById("formMessage");
-
-    form.addEventListener("submit", async (e) => {
+    regForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const age = document.getElementById("age").value;
 
-      const formData = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        email: document.getElementById("email").value,
-        age: document.getElementById("age").value
-      };
+      if (!name || !phone || !email || !age) {
+        formMessage.textContent = "Please fill in all fields.";
+        formMessage.style.color = "red";
+        return;
+      }
 
       try {
-        const response = await fetch(
-          "https://script.google.com/macros/s/AKfycbx933qfQXLyooIn8zp8MF39fw5TErbdYLMbYX9ubrUwB0Cre1fsBL4sJiNdaQFUUZeM/exec",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-          }
-        );
-
-        const result = await response.json();
-
-        if (result.result === "success") {
-          formMessage.textContent = "✅ Form submitted successfully!";
-          form.reset();
-        } else {
-          formMessage.textContent = "❌ Error submitting form: " + (result.error || "Unknown error");
-        }
-
+        await db.collection("registrations").add({
+          name, phone, email, age,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        formMessage.textContent = "✅ Registration submitted successfully!";
+        formMessage.style.color = "green";
+        regForm.reset();
       } catch (err) {
-        formMessage.textContent = "❌ Error submitting form. If this continues, try the Register button or WhatsApp.";
         console.error(err);
+        formMessage.textContent = "❌ Error submitting registration. Try again.";
+        formMessage.style.color = "red";
       }
+    });
+
+    // Donation buttons Firebase + WhatsApp
+    document.querySelectorAll('.donation-card').forEach(card => {
+      card.addEventListener('click', async () => {
+        let amount = card.getAttribute('data-amount');
+        if (amount == "0") return; // Custom handled separately
+        try {
+          await db.collection('donations').add({
+            amount: parseInt(amount),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          const message = encodeURIComponent(`I want to donate ₦${amount} to support VOAL Technology free training.`);
+          window.open(`https://wa.me/2348100145204?text=${message}`, '_blank');
+        } catch (err) { console.error(err); alert("Failed to record donation."); }
+      });
+    });
+
+    // Custom donation
+    document.getElementById('donateCustom').addEventListener('click', async () => {
+      const customAmount = prompt("Enter the amount you want to donate (₦):");
+      if (!customAmount || isNaN(customAmount) || parseInt(customAmount) <= 0) return;
+      try {
+        await db.collection('donations').add({
+          amount: parseInt(customAmount),
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        const message = encodeURIComponent(`I want to donate ₦${customAmount} to support VOAL Technology free training.`);
+        window.open(`https://wa.me/2348100145204?text=${message}`, '_blank');
+      } catch (err) { console.error(err); alert("Failed to record donation."); }
+    });
+
+    // Smooth scroll for back-to-top
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
     });
   </script>
 </body>
