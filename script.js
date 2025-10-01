@@ -103,6 +103,27 @@
       });
     });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navUl = document.querySelector('nav ul');
+
+  if (hamburger && navUl) {
+    hamburger.addEventListener('click', () => {
+      navUl.classList.toggle('show');       // Show/hide nav
+      hamburger.classList.toggle('active'); // Animate hamburger
+    });
+
+    // optional: close menu when a link is clicked
+    navUl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navUl.classList.remove('show');
+        hamburger.classList.remove('active');
+      });
+    });
+  }
+});
+
     // -------------------------
     // Active nav on scroll
     // -------------------------
@@ -336,10 +357,8 @@ AOS.init({
   once: true, // animation happens only once
 });
 
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.querySelector('nav ul');
 
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active'); // Animate hamburger
-  navMenu.classList.toggle('show');     // Show/hide nav links
-});
 
