@@ -1,3 +1,4 @@
+
 // script.js — Unified site interactivity (compatible with Firebase v8 global SDK)
 // Save as script.js and include with <script src="script.js"></script> before </body>
 'use strict';
@@ -338,9 +339,4 @@ AOS.init({
 // Hamburger menu toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.querySelector('nav ul');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active'); // Animate hamburger
-  navMenu.classList.toggle('show');     // Show/hide nav links
-});
 
