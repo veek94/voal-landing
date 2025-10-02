@@ -581,90 +581,135 @@ blockquote.quote {
   background: linear-gradient(180deg,var(--accent), #00b977);
 }
 
-/* -------------------------
-   Footer
-   ------------------------- */
+/* ===== Footer Styling ===== */
 .footer {
-  background: #07121a;
-  color: #d9f6ea;
-  padding: 28px 20px;
-  overflow: hidden;
+  background: #111;
+  color: #eee;
+  padding: 50px 20px 20px;
+  text-align: center;
+  position: relative;
 }
+
 .footer-container {
-  display:flex;
-  gap:18px;
-  align-items:flex-start;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 8px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.footer-logo-box { flex: 0 0 auto; }
-.footer-logo {
-  width: 100px;
-  height: auto;
-  border-radius:8px;
-  transition: transform .28s ease, box-shadow .28s ease;
-  display:block;
+.footer-logo-img {
+  width: 120px;
+  margin-bottom: 15px;
+  animation: fadeInDown 1s ease;
 }
-.footer-logo:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
 
-/* links & contact compact style */
-.footer-links, .footer-contact {
-  flex: 1 1 200px;
-  min-width: 160px;
+.footer-col h4 {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 18px;
+  position: relative;
+  display: inline-block;
+  animation: fadeInUp 1s ease;
 }
-.footer-links h4, .footer-contact h4, .footer-socials h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: var(--accent);
-}
-.footer-links ul { list-style:none; padding:0; margin:0; }
-.footer-links li { margin:6px 0; }
-.footer-links a, .footer-contact a {
-  color: #d9f6ea; text-decoration:none; display:inline-block; transition: transform .18s ease, color .18s ease;
-}
-.footer-links a:hover, .footer-contact a:hover { color: var(--accent); transform: translateX(6px); }
 
-/* footer bottom / copyright */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin: 8px 0;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ddd;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #00ff7f;
+  padding-left: 8px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  transition: transform 0.3s ease;
+}
+.footer-contact p:hover {
+  transform: translateX(5px);
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #222;
+  color: #fff;
+  font-size: 20px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: #00ff7f;
+  transform: scale(1.2) rotate(5deg);
+  color: #111;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+.pulse {
+  animation: pulse 2.5s infinite;
+}
+
+/* Footer Bottom */
 .footer-bottom {
-  text-align:center;
-  padding: 12px 0 6px;
-  font-size: 0.92rem;
-  color: #a1c0b7;
+  margin-top: 25px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #aaa;
 }
 
-/* small pulse on footer logo to show life, subtle */
-@keyframes footer-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
-}
-.footer-logo { animation: footer-pulse 10s ease-in-out infinite; }
-
-/* -------------------------
-   Floating WhatsApp button
-   ------------------------- */
+/* Floating WhatsApp Help Button */
 .whatsapp-float {
   position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index:1500;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  background: linear-gradient(180deg, #25d366, #0aa85f);
-  box-shadow: 0 10px 30px rgba(2,6,23,0.18);
-  text-decoration:none;
-  transition: transform .12s ease, box-shadow .12s ease;
+  width: 55px;
+  height: 55px;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: transform 0.3s ease;
 }
-.whatsapp-float img, .whatsapp-float svg { width:28px; height:28px; display:block; }
-.whatsapp-float:hover { transform: translateY(-4px); }
+
+.whatsapp-float:hover {
+  transform: scale(1.2);
+  background: #1ebe5d;
+}
+
 
 /* -------------------------
    Small screens / responsive
