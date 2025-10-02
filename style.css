@@ -583,9 +583,9 @@ blockquote.quote {
 
 /* ===== Footer Styling ===== */
 .footer {
-  background: #111;
+  background: #0c0c0c;
   color: #eee;
-  padding: 50px 20px 20px;
+  padding: 40px 20px 15px;
   text-align: center;
   position: relative;
 }
@@ -593,20 +593,20 @@ blockquote.quote {
 .footer-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
+  gap: 25px;
   max-width: 1200px;
   margin: auto;
 }
 
 .footer-logo-img {
-  width: 120px;
-  margin-bottom: 15px;
+  width: 100px;
+  margin-bottom: 12px;
   animation: fadeInDown 1s ease;
 }
 
 .footer-col h4 {
   color: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   font-size: 18px;
   position: relative;
   display: inline-block;
@@ -619,7 +619,7 @@ blockquote.quote {
 }
 
 .footer-col ul li {
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
 .footer-col ul li a {
@@ -630,59 +630,66 @@ blockquote.quote {
 
 .footer-col ul li a:hover {
   color: #00ff7f;
-  padding-left: 8px;
+  padding-left: 6px;
 }
 
 .footer-contact p {
-  margin: 8px 0;
-  transition: transform 0.3s ease;
+  margin: 6px 0;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 .footer-contact p:hover {
   transform: translateX(5px);
+  color: #00ff7f;
 }
 
 /* Social Icons */
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 14px;
   margin-top: 10px;
 }
 
 .social-icons a {
+  text-decoration: none; /* remove underline */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #222;
-  color: #fff;
   font-size: 20px;
+  color: #fff;
+  background: #222;
   transition: transform 0.3s ease, background 0.3s ease;
 }
 
+/* platform colors */
+.social.whatsapp { background: #25D366; }
+.social.facebook { background: #1877f2; }
+.social.youtube { background: #ff0000; }
+.social.linkedin { background: #0a66c2; }
+
 .social-icons a:hover {
-  background: #00ff7f;
-  transform: scale(1.2) rotate(5deg);
-  color: #111;
+  transform: scale(1.15) rotate(5deg);
+  opacity: 0.9;
 }
 
-/* Pulse Animation */
+/* Subtle looping pulse */
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  50% { transform: scale(1.1); }
 }
-.pulse {
-  animation: pulse 2.5s infinite;
+.social-icons a {
+  animation: pulse 2.5s infinite ease-in-out;
 }
 
 /* Footer Bottom */
 .footer-bottom {
-  margin-top: 25px;
+  margin-top: 18px;
   border-top: 1px solid #333;
-  padding-top: 15px;
-  font-size: 14px;
+  padding-top: 12px;
+  font-size: 13px;
   color: #aaa;
 }
 
@@ -702,7 +709,7 @@ blockquote.quote {
   font-size: 28px;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
   z-index: 1000;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .whatsapp-float:hover {
