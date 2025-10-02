@@ -539,48 +539,6 @@ blockquote.quote {
 }
 #formMessage { display:block; margin-top:12px; font-weight:700; }
 
-/* -------------------------
-   Social links (header & footer)
-   ------------------------- */
-.social-links,
-.footer-socials .socials {
-  display:flex;
-  gap:12px;
-  align-items:center;
-  justify-content:center;
-}
-
-.social-links a,
-.footer-socials .socials a {
-  display:inline-flex;
-  padding:10px 12px;
-  border-radius:10px;
-  background: #0b2233;
-  color:#fff;
-  text-decoration: none; /* remove underline */
-  font-weight:700;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-  align-items:center;
-  justify-content:center;
-}
-
-/* social icon animation (subtle pulse & hover) */
-@keyframes social-pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.06); opacity: 0.92; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.footer-socials .socials a,
-.social-links a {
-  animation: social-pulse 4s ease-in-out infinite;
-}
-.footer-socials .socials a:hover,
-.social-links a:hover {
-  transform: translateY(-6px) scale(1.12);
-  box-shadow: 0 8px 22px rgba(2,6,23,0.18);
-  background: linear-gradient(180deg,var(--accent), #00b977);
-}
-
 /* ===== Footer Styling ===== */
 .footer {
   background: #0c0c0c;
