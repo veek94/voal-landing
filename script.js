@@ -1,364 +1,420 @@
+/**
+ * script.js — ES module (Firebase v9 modular)
+ * Note: This file uses async/await and Firestore modular imports.
+ */
 
-// script.js — Unified site interactivity (compatible with Firebase v8 global SDK)
-// Save as script.js and include with <script src="script.js"></script> before </body>
-'use strict';
+/* ===========================
+   Imports (Firebase v9 modular)
+   =========================== */
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-(function () {
-  // ----- Configuration -----
-  const TELEGRAM_LINK = 'https://t.me/+AlyGlcpbN-E2NWU0';
-  const WHATSAPP_NUMBER = '2348100145204'; // used for donation quick-links
+/* ===========================
+   Config / Constants
+   =========================== */
+const TELEGRAM_LINK = "https://t.me/+AlyGlcpbN-E2NWU0";
+const WHATSAPP_NUMBER = "2348100145204"; // used for donation quick-links
 
-  // If you already initialize firebase in <head>, we won't re-initialize.
-  // But include same config in case it's not initialized yet.
-  const firebaseConfig = {
-    apiKey: "AIzaSyB-1TQsUTckhDdWLuXWyutIiOwycU-X2uE",
-    authDomain: "solar-training-1e6be.firebaseapp.com",
-    projectId: "solar-training-1e6be",
-    storageBucket: "solar-training-1e6be.firebasestorage.app",
-    messagingSenderId: "5892298211",
-    appId: "1:5892298211:web:2e743c67f6bef3afde7cd6"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyB-1TQsUTckhDdWLuXWyutIiOwycU-X2uE",
+  authDomain: "solar-training-1e6be.firebaseapp.com",
+  projectId: "solar-training-1e6be",
+  storageBucket: "solar-training-1e6be.firebasestorage.app",
+  messagingSenderId: "5892298211",
+  appId: "1:5892298211:web:2e743c67f6bef3afde7cd6"
+};
 
-  // ----- Utilities -----
-  function $(sel, ctx = document) { return ctx.querySelector(sel); }
-  function $all(sel, ctx = document) { return Array.from(ctx.querySelectorAll(sel)); }
+/* ===========================
+   Helpers
+   =========================== */
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $all = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-  function createMessageElementIfMissing(form) {
-    let msg = form.querySelector('#formMessage');
-    if (!msg) {
-      msg = document.createElement('p');
-      msg.id = 'formMessage';
-      msg.setAttribute('aria-live', 'polite');
-      msg.style.marginTop = '12px';
-      form.appendChild(msg);
-    }
-    return msg;
+function createMessageElementIfMissing(form) {
+  let msg = form.querySelector("#formMessage");
+  if (!msg) {
+    msg = document.createElement("p");
+    msg.id = "formMessage";
+    msg.setAttribute("aria-live", "polite");
+    msg.style.marginTop = "12px";
+    form.appendChild(msg);
+  }
+  return msg;
+}
+
+function showFormMessage(form, text, color = "black") {
+  const msg = createMessageElementIfMissing(form);
+  msg.textContent = text;
+  msg.style.color = color;
+}
+
+/* A small wrapper to use SweetAlert2 if present, otherwise fallback to alert/text */
+function showAlert({ icon = "info", title = "", text = "", timer = 0 } = {}) {
+  if (window.Swal) {
+    const opts = { icon, title, text };
+    if (timer) opts.timer = timer;
+    if (timer) opts.showConfirmButton = false;
+    window.Swal.fire(opts);
+  } else {
+    // fallback
+    if (icon === "success") console.log("✔️", title, text);
+    else if (icon === "error") console.error("❌", title, text);
+    else console.info(title, text);
+    if (text) alert(`${title ? title + " — " : ""}${text}`);
+  }
+}
+
+/* ===========================
+   Initialize Firebase (v9)
+   =========================== */
+let db = null;
+try {
+  // safe-initialize (if multiple modules/scripts run, reuse first app)
+  if (!getApps().length) {
+    initializeApp(firebaseConfig);
+  }
+  db = getFirestore();
+  console.log("Firebase (v9) initialized — Firestore ready.");
+} catch (err) {
+  console.warn("Firebase init failed or Firestore unavailable:", err);
+  db = null;
+}
+
+/* ===========================
+   Main DOM-ready logic
+   =========================== */
+document.addEventListener("DOMContentLoaded", () => {
+  /* ----------------------------
+     AOS init (if available)
+     ---------------------------- */
+  if (window.AOS && typeof window.AOS.init === "function") {
+    AOS.init({ duration: 800, once: true });
   }
 
-  function showFormMessage(form, text, color = 'black') {
-    const msg = createMessageElementIfMissing(form);
-    msg.textContent = text;
-    msg.style.color = color;
-  }
+  /* ----------------------------
+     Fill year in footer
+     ---------------------------- */
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ----- Firebase init (v8 global) -----
-  let firestoreAvailable = false;
-  try {
-    if (typeof firebase === 'undefined') {
-      console.warn('Firebase global SDK not found. Firestore logging will be skipped.');
-    } else {
-      // avoid double-init
-      if (!firebase.apps || firebase.apps.length === 0) {
-        firebase.initializeApp(firebaseConfig);
-      }
-      if (firebase.firestore) {
-        window._voal_db = firebase.firestore();
-        firestoreAvailable = true;
-      } else {
-        console.warn('firebase.firestore not available.');
-      }
-    }
-  } catch (err) {
-    console.error('Firebase init error:', err);
-    firestoreAvailable = false;
-  }
-
-  // Wait for DOM
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // -------------------------
-    // AOS (if included)
-    // -------------------------
-    if (window.AOS) {
-      AOS.init({ duration: 800, once: true });
-    }
-
-    // -------------------------
-    // Hamburger / mobile nav
-    // -------------------------
-    const hamburger = document.getElementById('hamburger');
-    const navUl = $('nav ul');
-    const navLinks = $all('nav ul li a');
-
-    if (hamburger && navUl) {
-      hamburger.addEventListener('click', () => {
-        navUl.classList.toggle('show');
-        hamburger.classList.toggle('active');
-      });
-
-      // keyboard accessibility
-      hamburger.setAttribute('role', 'button');
-      hamburger.setAttribute('tabindex', '0');
-      hamburger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') hamburger.click();
-      });
-    }
-
-    navLinks.forEach(a => {
-      a.addEventListener('click', () => {
-        if (navUl && navUl.classList.contains('show')) {
-          navUl.classList.remove('show');
-          if (hamburger) hamburger.classList.remove('active');
-        }
-      });
-    });
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.getElementById('hamburger');
-  const navUl = document.querySelector('nav ul');
+  /* ----------------------------
+     Hamburger / mobile nav
+     ---------------------------- */
+  const hamburger = document.getElementById("hamburger");
+  const navUl = $("nav ul");
+  const navLinks = $all("nav ul li a");
 
   if (hamburger && navUl) {
-    hamburger.addEventListener('click', () => {
-      navUl.classList.toggle('show');       // Show/hide nav
-      hamburger.classList.toggle('active'); // Animate hamburger
+    // set ARIA attributes for a11y
+    hamburger.setAttribute("role", "button");
+    hamburger.setAttribute("aria-controls", "main-nav");
+    hamburger.setAttribute("aria-expanded", "false");
+    hamburger.tabIndex = 0;
+
+    function setNavExpandedState(expanded) {
+      hamburger.setAttribute("aria-expanded", expanded ? "true" : "false");
+      if (expanded) navUl.classList.add("show");
+      else navUl.classList.remove("show");
+      hamburger.classList.toggle("active", expanded);
+    }
+
+    hamburger.addEventListener("click", () => {
+      const opened = navUl.classList.contains("show");
+      setNavExpandedState(!opened);
     });
 
-    // optional: close menu when a link is clicked
-    navUl.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navUl.classList.remove('show');
-        hamburger.classList.remove('active');
+    // keyboard toggle
+    hamburger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
+
+    // Close menu when a link clicked (mobile)
+    navLinks.forEach((a) => {
+      a.addEventListener("click", () => {
+        // for mobile the show class will be removed
+        setNavExpandedState(false);
+      });
+    });
+
+    // Close when clicking outside nav (optional friendly behavior)
+    document.addEventListener("click", (e) => {
+      const isClickInside = navUl.contains(e.target) || hamburger.contains(e.target);
+      if (!isClickInside && navUl.classList.contains("show")) {
+        setNavExpandedState(false);
+      }
+    });
+  }
+
+  /* ----------------------------
+     Active nav on scroll
+     ---------------------------- */
+  const sections = $all("section[id]");
+  function updateActiveNav() {
+    const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    sections.forEach((section) => {
+      const top = section.offsetTop - 160;
+      const bottom = top + section.offsetHeight;
+      const id = section.getAttribute("id");
+      const link = document.querySelector(`nav ul li a[href="#${id}"]`);
+      if (!link) return;
+      if (scrollPos >= top && scrollPos < bottom) {
+        navLinks.forEach((a) => a.classList.remove("active"));
+        link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll", updateActiveNav);
+  // run once on load
+  setTimeout(updateActiveNav, 200);
+
+  /* ----------------------------
+     Smooth in-page scrolling for anchor links
+     ---------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (!href || href === "#") return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+
+  /* ----------------------------
+     Back-to-top visibility / click
+     ---------------------------- */
+  const backToTopAnchor = $(".back-to-top") || document.querySelector('a[href="#hero"]');
+  function toggleBackToTop() {
+    if (!backToTopAnchor) return;
+    const show = window.scrollY > 400;
+    backToTopAnchor.style.display = show ? "inline-block" : "none";
+  }
+  window.addEventListener("scroll", toggleBackToTop);
+  toggleBackToTop();
+  if (backToTopAnchor) {
+    backToTopAnchor.addEventListener("click", (e) => {
+      // If it's a hash anchor the smooth scroll handler will manage it,
+      // but ensure default behavior is prevented for manual scroll here.
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* ----------------------------
+     FAQ accordion (if present)
+     ---------------------------- */
+  const faqButtons = $all(".faq-question");
+  if (faqButtons.length) {
+    faqButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const item = btn.parentElement;
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        $all(".faq-item").forEach((i) => {
+          if (i !== item) {
+            i.classList.remove("active");
+            const q = i.querySelector(".faq-question");
+            if (q) q.setAttribute("aria-expanded", "false");
+          }
+        });
+        item.classList.toggle("active");
+        btn.setAttribute("aria-expanded", String(!expanded));
+      });
+      btn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") btn.click();
       });
     });
   }
-});
 
-    // -------------------------
-    // Active nav on scroll
-    // -------------------------
-    const sections = $all('section[id]');
-    function updateActiveNav() {
-      const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
-      sections.forEach(section => {
-        const top = section.offsetTop - 160;
-        const bottom = top + section.offsetHeight;
-        const id = section.getAttribute('id');
-        const link = document.querySelector(`nav ul li a[href="#${id}"]`);
-        if (!link) return;
-        if (scrollPos >= top && scrollPos < bottom) {
-          navLinks.forEach(a => a.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
-    }
-    window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav();
+  /* ----------------------------
+     Registration form handling (regForm)
+     - save to Firestore 'registrations'
+     - show message then redirect to TELEGRAM_LINK
+     ---------------------------- */
+  const regForm =
+    document.getElementById("regForm") ||
+    document.getElementById("registerForm") ||
+    document.getElementById("myForm");
 
-    // -------------------------
-    // Smooth anchor scrolling for in-page links
-    // -------------------------
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (!href || href === '#') return;
-        // Allow external anchors (if element missing) to work normally
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-        } // else let it behave
-      });
-    });
+  if (regForm) {
+    createMessageElementIfMissing(regForm);
 
-    // -------------------------
-    // Back to top visibility (handles button id/back-to-top OR .back-to-top anchor)
-    // -------------------------
-    const backToTopButton = document.getElementById('backToTop') || $('.back-to-top');
-    function toggleBackToTop() {
-      if (!backToTopButton) return;
-      const show = window.scrollY > 400;
-      if (show) backToTopButton.style.display = 'inline-block';
-      else backToTopButton.style.display = 'none';
-    }
-    window.addEventListener('scroll', toggleBackToTop);
-    toggleBackToTop();
+    regForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    if (backToTopButton) {
-      backToTopButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
+      // tolerant extraction of fields
+      const nameEl =
+        regForm.querySelector("#name") ||
+        regForm.querySelector("#fullname") ||
+        regForm.querySelector('input[name="name"]') ||
+        regForm.querySelector('input[name="fullname"]');
+      const phoneEl = regForm.querySelector("#phone") || regForm.querySelector('input[name="phone"]');
+      const emailEl = regForm.querySelector("#email") || regForm.querySelector('input[name="email"]');
+      const ageEl = regForm.querySelector("#age") || regForm.querySelector('select[name="age"]') || regForm.querySelector('input[name="age"]');
 
-    // -------------------------
-    // FAQ accordion (if using .faq-question style)
-    // -------------------------
-    const faqButtons = $all('.faq-question');
-    if (faqButtons.length) {
-      faqButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const item = btn.parentElement;
-          const expanded = btn.getAttribute('aria-expanded') === 'true';
-          // Close others
-          $all('.faq-item').forEach(i => {
-            if (i !== item) {
-              i.classList.remove('active');
-              const q = i.querySelector('.faq-question');
-              if (q) q.setAttribute('aria-expanded', 'false');
-            }
+      const name = nameEl ? nameEl.value.trim() : "";
+      const phone = phoneEl ? phoneEl.value.trim() : "";
+      const email = emailEl ? emailEl.value.trim() : "";
+      const age = ageEl ? ageEl.value.trim() : "";
+
+      if (!name || !phone || !email) {
+        showFormMessage(regForm, "⚠️ Please fill in all required fields.", "red");
+        return;
+      }
+
+      showFormMessage(regForm, "⏳ Submitting registration...", "black");
+
+      try {
+        if (db) {
+          await addDoc(collection(db, "registrations"), {
+            name,
+            phone,
+            email,
+            age,
+            timestamp: serverTimestamp()
           });
-          item.classList.toggle('active');
-          btn.setAttribute('aria-expanded', String(!expanded));
-        });
-        btn.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') btn.click();
-        });
-      });
-    }
+        } else {
+          console.warn("Firestore not available — skipping DB write for registration.");
+        }
 
-    // -------------------------
-    // Registration form handling
-    // -------------------------
-    // Support multiple possible IDs (regForm / registerForm / myForm)
-    const regForm = document.getElementById('regForm') || document.getElementById('registerForm') || document.getElementById('myForm');
-    if (regForm) {
-      // Ensure a message element exists
-      createMessageElementIfMissing(regForm);
+        // success UI (prefer Swal if available)
+        showFormMessage(regForm, "✅ Registration submitted successfully! Redirecting…", "green");
+        showAlert({ icon: "success", title: "Registration Successful!", text: "Redirecting you to our Telegram community…", timer: 1200 });
 
-      regForm.addEventListener('submit', async (e) => {
+        // short delay then redirect to telegram (same tab)
+        setTimeout(() => {
+          window.location.href = TELEGRAM_LINK;
+        }, 1300);
+
+        try {
+          regForm.reset();
+        } catch (err) {
+          // ignore
+        }
+      } catch (err) {
+        console.error("Registration error:", err);
+        showFormMessage(regForm, "❌ Error submitting registration. Try again or contact us on WhatsApp.", "red");
+        showAlert({ icon: "error", title: "Error", text: "Could not save your registration. Please try again." });
+      }
+    });
+  }
+
+  /* ----------------------------
+     Donation cards behavior
+     - .donation-card elements (data-amount attribute)
+     - logs donation to Firestore (best-effort), opens WhatsApp chat
+     ---------------------------- */
+  $all(".donation-card").forEach((card) => {
+    card.addEventListener("click", async () => {
+      const amountAttr = card.getAttribute("data-amount");
+      if (amountAttr == null) return;
+
+      // custom / other -> handled separately
+      if (amountAttr === "0" || card.id === "donateCustom") {
+        // let the donateCustom handler manage it
+        return;
+      }
+
+      const amount = parseInt(amountAttr, 10) || 0;
+
+      try {
+        if (db) {
+          await addDoc(collection(db, "donations"), {
+            amount,
+            timestamp: serverTimestamp()
+          });
+        }
+      } catch (err) {
+        console.error("Donation logging error:", err);
+      }
+
+      const message = encodeURIComponent(`I want to donate ₦${amount} to support VOAL Technology free training.`);
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+    });
+  });
+
+  /* Custom donation card */
+  const donateCustomBtn = document.getElementById("donateCustom");
+  if (donateCustomBtn) {
+    donateCustomBtn.addEventListener("click", async () => {
+      const custom = prompt("Enter the amount you want to donate (₦):");
+      if (!custom) return;
+      if (isNaN(custom) || parseInt(custom, 10) <= 0) {
+        alert("Please enter a valid numeric amount.");
+        return;
+      }
+      try {
+        if (db) {
+          await addDoc(collection(db, "donations"), {
+            amount: parseInt(custom, 10),
+            timestamp: serverTimestamp()
+          });
+        }
+      } catch (err) {
+        console.error("Custom donation logging error:", err);
+      }
+      const message = encodeURIComponent(`I want to donate ₦${custom} to support VOAL Technology free training.`);
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+    });
+  }
+
+  /* ----------------------------
+     Make WhatsApp floating button keyboard accessible
+     ---------------------------- */
+  const waFloat = document.querySelector(".whatsapp-float");
+  if (waFloat) {
+    waFloat.setAttribute("role", "link");
+    waFloat.setAttribute("tabindex", "0");
+    waFloat.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-
-        // Attempt to extract fields (tolerant to your form structure)
-        const nameEl = regForm.querySelector('#name') || regForm.querySelector('#fullname') || regForm.querySelector('input[name="name"]') || regForm.querySelector('input[name="fullname"]');
-        const phoneEl = regForm.querySelector('#phone') || regForm.querySelector('input[name="phone"]');
-        const emailEl = regForm.querySelector('#email') || regForm.querySelector('input[name="email"]');
-        // age: could be select or input
-        const ageEl = regForm.querySelector('#age') || regForm.querySelector('select[name="age"]') || regForm.querySelector('input[name="age"]');
-
-        const name = nameEl ? nameEl.value.trim() : '';
-        const phone = phoneEl ? phoneEl.value.trim() : '';
-        const email = emailEl ? emailEl.value.trim() : '';
-        const age = ageEl ? ageEl.value.trim() : '';
-
-        if (!name || !phone || !email) {
-          showFormMessage(regForm, '⚠️ Please fill in all required fields.', 'red');
-          return;
-        }
-
-        showFormMessage(regForm, '⏳ Submitting registration...', 'black');
-
-        // Save to Firestore if available; otherwise skip saving but still redirect.
-        try {
-          if (firestoreAvailable && window._voal_db) {
-            await window._voal_db.collection('registrations').add({
-              name, phone, email, age,
-              timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-          } else {
-            console.warn('Firestore not available: registration will not be logged to DB.');
-          }
-
-          // success UI
-          showFormMessage(regForm, '✅ Registration submitted successfully! Redirecting…', 'green');
-
-          // Redirect to Telegram reliably
-          setTimeout(() => {
-            window.location.href = TELEGRAM_LINK;
-          }, 1300);
-
-          // reset form
-          try { regForm.reset(); } catch (err) { /* noop */ }
-        } catch (err) {
-          console.error('Registration error:', err);
-          showFormMessage(regForm, '❌ Error submitting registration. Try again or contact us on WhatsApp.', 'red');
-        }
-      });
-    } // end regForm
-
-    // -------------------------
-    // Donation quick flow (donation-card elements)
-    // -------------------------
-    $all('.donation-card').forEach(card => {
-      card.addEventListener('click', async () => {
-        const amount = card.getAttribute('data-amount');
-        if (!amount) return;
-
-        // If amount is "0" this probably means "Other / custom"
-        if (amount === '0' || card.id === 'donateCustom') {
-          // handled later
-          return;
-        }
-
-        // Try to log donation to firestore (best-effort)
-        try {
-          if (firestoreAvailable && window._voal_db) {
-            await window._voal_db.collection('donations').add({
-              amount: parseInt(amount, 10) || 0,
-              timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-          }
-        } catch (err) {
-          console.error('Donation logging error:', err);
-        }
-
-        const message = encodeURIComponent(`I want to donate ₦${amount} to support VOAL Technology free training.`);
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-      });
+        waFloat.click();
+      }
     });
+  }
 
-    // custom donation card button
-    const donateCustomBtn = document.getElementById('donateCustom');
-    if (donateCustomBtn) {
-      donateCustomBtn.addEventListener('click', async () => {
-        const custom = prompt('Enter amount you want to donate (₦):');
-        if (!custom) return;
-        if (isNaN(custom) || parseInt(custom, 10) <= 0) {
-          alert('Please enter a valid numeric amount.');
-          return;
-        }
+  /* ----------------------------
+     Mark external target="_blank" links with rel for safety
+     ---------------------------- */
+  document.querySelectorAll('a[target="_blank"]').forEach((a) => {
+    a.setAttribute("rel", "noopener noreferrer");
+  });
 
-        try {
-          if (firestoreAvailable && window._voal_db) {
-            await window._voal_db.collection('donations').add({
-              amount: parseInt(custom, 10),
-              timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-          }
-        } catch (err) {
-          console.error('Custom donation logging error:', err);
-        }
-
-        const message = encodeURIComponent(`I want to donate ₦${custom} to support VOAL Technology free training.`);
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-      });
-    }
-
-    // -------------------------
-    // Donation buttons / donateCustom fallback for other markup (if .donation-grid uses clickable divs)
-    // -------------------------
-    // already handled with .donation-card above
-
-    // -------------------------
-    // Make sure WhatsApp floating button is keyboard accessible
-    // -------------------------
-    const waFloat = document.querySelector('.whatsapp-float') || document.querySelector('.whatsapp-float-btn') || document.querySelector('a.whatsapp-float');
-    if (waFloat) {
-      waFloat.setAttribute('role', 'link');
-      waFloat.setAttribute('tabindex', '0');
-      waFloat.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') waFloat.click();
-      });
-    }
-
-    // -------------------------
-    // Defensive: ensure any inline contact links open in new tab when external
-    // -------------------------
-    document.querySelectorAll('a[target="_blank"]').forEach(a => {
-      a.setAttribute('rel', 'noopener noreferrer');
+  /* ----------------------------
+     Diagnostic: detect images that fail to load (useful on Vercel where case-sensitivity matters)
+     - adds console warnings listing broken image src values
+     ---------------------------- */
+  window.addEventListener("load", () => {
+    const bad = [];
+    $all("img").forEach((img) => {
+      // If the image failed to load (naturalWidth = 0) mark it for debugging
+      if (!img.complete || img.naturalWidth === 0) {
+        bad.push(img.src);
+        img.dataset.loadError = "true";
+        img.setAttribute("title", "Image failed to load — check path/casing");
+      }
     });
+    if (bad.length) {
+      console.warn("Images failed to load (check file paths/casing). Examples:", bad.slice(0, 10));
+    }
+  });
 
-    // Done DOMContentLoaded
-  }); // DOMContentLoaded
+  // end DOMContentLoaded
+}); // DOMContentLoaded
 
-})(); // IIFE
-
-AOS.init({
-  once: true, // animation happens only once
-});
-
-// Hamburger menu toggle
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.querySelector('nav ul');
-
-
+/* ===========================
+   Extra safety: if AOS included but DOMContentLoaded already fired earlier,
+   ensure AOS also initialized (very small chance).
+   =========================== */
+if (window.AOS && typeof window.AOS.init === "function") {
+  window.AOS.init({ duration: 800, once: true });
+}
